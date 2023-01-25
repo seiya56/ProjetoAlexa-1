@@ -1,0 +1,88 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "universidade rodrigues",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "olá",
+            "como vai você",
+            "diga oi mundo",
+            "diga oi",
+            "oi",
+            "diga olá mundo",
+            "diga olá"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AulasIntent",
+          "slots": [
+            {
+              "name": "diaSemana",
+              "type": "AMAZON.DayOfWeek"
+            }
+          ],
+          "samples": [
+            "quais as aulas de {diaSemana}",
+            "qual a aula de {diaSemana}",
+            "quais foram as aulas de {diaSemana}",
+            "aulas {diaSemana}",
+            "aula {diaSemana}",
+            "{diaSemana} eu tive aula de ",
+            "{diaSemana} tive que aula",
+            "{diaSemana} tive aula de que ",
+            "quais são as aulas de {diaSemana}",
+            "qual é a aula de {diaSemana}",
+            "quais aulas eu tive {diaSemana}",
+            "qual aula eu tive {diaSemana}",
+            "que aula eu tive {diaSemana}",
+            "que aulas eu tive {diaSemana}",
+            "{diaSemana} eu tive aulas de que ",
+            "{diaSemana} eu tive aula de que ",
+            "aula de {diaSemana}",
+            "aulas de {diaSemana}"
+          ]
+        },
+        {
+          "name": "HorarioCoordenadorIntent",
+          "slots": [],
+          "samples": [
+            "coordenador",
+            "horário do coordenador",
+            "horário coordenador"
+          ]
+        },
+        {
+          "name": "NotasIntent",
+          "slots": [],
+          "samples": [
+            "boletim de notas",
+            "boletim",
+            "nota",
+            "notas"
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "16"
+}
