@@ -84,18 +84,24 @@ const AulaIntentHandler = {
 
 
 const NotasIntentHandler = {
-canHandle(handlerInput) {
-return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-&& Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
-},
-handle(handlerInput) {
-const speakOutput = "Você tirou 9.3 na AC, e 9.1 na AI. totalizando assim 9.2 na sua média semestral";
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
+    },
+    handle(handlerInput) {
+        const notaAva = Math.floor(Math.random() * 11);;
+        const notaProv = Math.floor(Math.random() * 11);;
+        const notaProj = Math.floor(Math.random() * 11);;
+        
+        const notaFinal = (notaAva+notaProv+notaProj)/3;
 
-return handlerInput.responseBuilder
-.speak(speakOutput)
-.reprompt(speakOutput)
-.getResponse();
-}
+        const speakOutput = `As notas são definidas das seguinte forma: avaliações, provas e projeto somadas e divididas por três totalizando a sua nota final. Sua nota de avaliação é ${notaAva}, Sua nota de prova é ${notaProv}, Sua nota de Projeto é de ${notaProj}. Sua nota final e de ${notaFinal.toFixed(2)} `;
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
 };
 
 const HorarioCoordenadorIntentHandler = {
