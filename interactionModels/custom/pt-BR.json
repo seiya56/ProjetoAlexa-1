@@ -33,7 +33,7 @@
           "samples": []
         },
         {
-          "name": "AulasIntent",
+          "name": "AulaIntent",
           "slots": [
             {
               "name": "diaSemana",
@@ -84,5 +84,5 @@
       "types": []
     }
   },
-  "version": "16"
+  "version": "17"
 }

@@ -4,7 +4,6 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
-//["ontem", "hoje", "amanhã", "segunda", "segunda-feira" ,"terça", "terça-feira", "quarta", "quarta-feira", "quinta", "quinta-feira", "sexta", "sexta-feira"];
 
 const LaunchRequestHandler = {
 
@@ -24,7 +23,7 @@ const LaunchRequestHandler = {
 };
 
 
-const AulasIntentHandler = {
+const AulaIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AulasIntent';
@@ -33,47 +32,45 @@ const AulasIntentHandler = {
     handle(handlerInput) {
        
         const parDiaSemana =handlerInput.requestEnvelope.request.intent.slots.diaSemana.value;
-        let speakOutput = '';
-        
+        let speakOutput = 'não entendi. pode repitir?';
+       
         switch(parDiaSemana){
             
             case "hoje":
                 speakOutput = "Hoje você tem aula de Orientação a Objeto, das 18:30 às 22:10";
-                break
+            break;
             
             case "ontem": 
                 speakOutput = "Ontem você teve aula de gerênciaamento de software, das 18:45 às 22 horas";
-                break
+            break;
             
             case "amanhã":
                 speakOutput= "Amanhã você terá aula de arquitetura e infraestrutura em núvem";
-                break
-                
-            
-          /*não está indo pois não está permitindo o uso de palavras referentes aos dias da semana (pessquisar o motivo disso)
-          
-            case "segunda"||"segunda-feira":
+            break;
+
+            case "2ª":case"2.ª-feira":
                 speakOutput = "Segunda você terá aula de matemática das 18 às 22 horas";
-                break
-            case "terça" || "terça-feira":
-                 speakOutput = "terça você terá aula de web design das 19 às 22 horas"
-                break
+            break;
             
-            case "quarta" || "quarta-feira":
+            case "3ª":case "3.ª feira": case"terça": case"terça feira":
+                 speakOutput = "terça você terá aula de web design das 19 às 22 horas";
+            break;
+            
+            case "4ª": case "4.ª feira":
                 speakOutput = "quarta você terá aula de infraestrutura de rede das 17 ás 20 horas";
-                break
+            break;
                 
-            case "quinta" || "quinta-feira":
+            case "5ª": case"5.ª feira":
                 speakOutput = "quinta você terá aula de excel das 18 às 20:30 horas";
-                break
+            break;
                 
-            case "sexta" || "sexta-feira":
+            case "6ª": case "6.ª":case"6.ª feira":
             speakOutput="sexta você terá aula de lógica das 15 às 19 horas";
-                break
+            break;
             
-            case "sábado" || "domingo":
+            case "sábado": case "domingo":
             speakOutput="você não possue aulas marcadas neste dia";
-                break */
+            break; 
         }
     
         return handlerInput.responseBuilder
@@ -92,7 +89,7 @@ return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
 && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
 },
 handle(handlerInput) {
-const speakOutput = `A sua nota do módulo de Orientação a Objetos foi de 10. Meus parabéns pelo seu empenho, tenho muito orgulho de você`;
+const speakOutput = "Você tirou 9.3 na AC, e 9.1 na AI. totalizando assim 9.2 na sua média semestral";
 
 return handlerInput.responseBuilder
 .speak(speakOutput)
@@ -243,7 +240,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         HelloWorldIntentHandler,
-        AulasIntentHandler,
+        AulaIntentHandler,
         NotasIntentHandler,
         HorarioCoordenadorIntentHandler,
         HelpIntentHandler,
