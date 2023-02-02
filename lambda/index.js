@@ -21,6 +21,59 @@ const LaunchRequestHandler = {
     
     }
 };
+const DOCUMENT_ID = "notas";
+
+const datasource = {
+    "textListData": {
+        "type": "object",
+        "objectId": "textListSample",
+        "backgroundImage": {
+            "contentDescription": null,
+            "smallSourceUrl": null,
+            "largeSourceUrl": null,
+            "sources": [
+                {
+                    "url": "https://i.pinimg.com/564x/f7/43/aa/f743aa661120cf3d108c3f8dad211e5f.jpg",
+                    "size": "large"
+                }
+            ]
+        },
+        "title": "Unisuam",
+        "listItems": [
+            {
+                "primaryText": "Peonies & Petals Nursery"
+            },
+            {
+                "primaryText": "Ivy Lane Nursery and Tree Farm"
+            },
+            {
+                "primaryText": "House of Hyacinth"
+            },
+            {
+                "primaryText": "Swan Nursery"
+            },
+            {
+                "primaryText": "House of Peonies"
+            },
+            {
+                "primaryText": "Spruce Nursery"
+            }
+        ],
+        "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/logo/logo-modern-botanical-white.png"
+    }
+};
+
+const createDirectivePayload = (aplDocumentId, dataSources = {}, tokenId = "documentToken") => {
+    return {
+        type: "Alexa.Presentation.APL.RenderDocument",
+        token: tokenId,
+        document: {
+            type: "Link",
+            src: "doc://alexa/apl/documents/" + aplDocumentId
+        },
+        datasources: dataSources
+    }
+};
 
 
 const AulaIntentHandler = {
@@ -37,8 +90,17 @@ const AulaIntentHandler = {
         switch(parDiaSemana){
             
             case "hoje":
+                
                 speakOutput = "Hoje você tem aula de Orientação a Objeto, das 18:30 às 22:10";
+                if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+                // generate the APL RenderDocument directive that will be returned from your skill
+                const aplDirective = createDirectivePayload(DOCUMENT_ID, datasource);
+                // add the RenderDocument directive to the responseBuilder
+                handlerInput.responseBuilder.addDirective(aplDirective);
+                }
+
             break;
+            
             
             case "ontem": 
                 speakOutput = "Ontem você teve aula de gerênciaamento de software, das 18:45 às 22 horas";
@@ -72,6 +134,7 @@ const AulaIntentHandler = {
             speakOutput="você não possue aulas marcadas neste dia";
             break; 
         }
+        
     
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -83,7 +146,7 @@ const AulaIntentHandler = {
 
 
 
-const NotasIntentHandler = {
+/*const NotasIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NotasIntent';
@@ -102,7 +165,7 @@ const NotasIntentHandler = {
             .reprompt(speakOutput)
             .getResponse();
     }
-};
+};*/
 
 const HorarioCoordenadorIntentHandler = {
     canHandle(handlerInput){
@@ -247,7 +310,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         AulaIntentHandler,
-        NotasIntentHandler,
+        //NotasIntentHandler,
         HorarioCoordenadorIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
